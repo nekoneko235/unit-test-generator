@@ -1,0 +1,16 @@
+{
+    "name": "TOPSIC - PHP Unit test",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "問題ページから、ユニットテストを自動生成し、クリップボードにコピーします",
+    "permissions": ["clipboardWrite"],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*/atcoder_problems/abc*",
+                "https://*/examinations/*/examination_results/*/resubmit"
+            ],
+            "js": ["jquery-3.6.1.min.js", "content.js"]
+        }
+    ]
+}
