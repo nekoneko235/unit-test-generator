@@ -84,16 +84,16 @@ function acquireIO() {
 
 function createPyUnittest(io) {
     let text = `<?php
-require_once 'src\\Sample.php';
+require_once 'src\\Task.php';
 use PHPUnit\\Framework\\TestCase;
 
-class SampleTest extends TestCase
+class TaskTest extends TestCase
 {
-    private static $sample;
+    private static $task;
 
     public static function setUpBeforeClass(): void
     {
-        SampleTest::$sample = new Sample();
+        TaskTest::$task = new Task();
     }
 
     /**
@@ -103,7 +103,7 @@ class SampleTest extends TestCase
     {
         $stringIo = fopen("data://text/plain,$input", 'r');
         $this->expectOutputString($expected);
-        SampleTest::$sample->solver($stringIo);
+        TaskTest::$task->solver($stringIo);
     }
 
     public function ioProvider(): array
