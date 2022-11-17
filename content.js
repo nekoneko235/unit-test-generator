@@ -108,40 +108,36 @@ class TaskTest extends TestCase
 
     public function ioProvider(): array
     {
-        return [
-`;
+        return [`;
+
     for (let i = 0; i < io.length; i++) {
         text += `
             '${io[i].name}' => [
-                <<<EOT
-        ${io[i].input.trim('\n').replace(/\n/g, '\r\n')}
-        EOT,
-                <<<EOT
-        ${io[i].output.trim('\n').replace(/\n/g, '\r\n')}
-        EOT
-            ],
-`;
+                <<<EOF`;
+        text += `
+${io[i].input.trim().replace(/\n/g, '\r\n')}
+EOF,`;
+        text += `
+                <<<EOF`;
+        text += `
+${io[i].output.trim().replace(/\n/g, '\r\n')}
+EOF
+            ],`;
     }
 
     text += `
         ];
     }
-}
-`;
+}`;
 
     return text;
 }
 
-function copyToClipboard(text) {
-    if (!navigator.clipboard) {
-        throw new Error('このブラウザは対応していません');
+async function copyToClipboard(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+        console.log('コピーしました');
+    } catch (error) {
+        console.error((error && error.message) || 'コピーに失敗しました');
     }
-    navigator.clipboard.writeText(text).then(
-        () => {
-            console.log('コピーしました');
-        },
-        () => {
-            console.error('コピーに失敗しました');
-        }
-    );
 }
