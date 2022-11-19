@@ -1,10 +1,4 @@
 (() => {
-    try {
-        copyToClipboard(createPyUnittest(acquireIO()));
-    } catch (error) {
-        console.error(error);
-    }
-
     document.addEventListener(
         'keydown',
         (e) => {

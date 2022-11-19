@@ -4,6 +4,9 @@
     "manifest_version": 3,
     "description": "問題ページから、ユニットテストを自動生成し、クリップボードにコピーします",
     "permissions": ["clipboardWrite"],
+    "icons": {
+        "32": "accept.png"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -12,5 +15,8 @@
             ],
             "js": ["jquery-3.6.1.min.js", "content.js"]
         }
-    ]
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    }
 }
