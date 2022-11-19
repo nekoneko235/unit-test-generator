@@ -4,7 +4,7 @@
         (e) => {
             if ((e.ctrlKey || e.metaKey) && e.code === 'Backslash') {
                 try {
-                    copyToClipboard(createPyUnittest(acquireIO()));
+                    copyToClipboard(createPHPUnittest(acquireIO()));
                 } catch (error) {
                     console.error(error);
                 } finally {
@@ -76,7 +76,7 @@ function acquireIO() {
     return io;
 }
 
-function createPyUnittest(io) {
+function createPHPUnittest(io) {
     let text = `<?php
 require_once 'src\\Task.php';
 use PHPUnit\\Framework\\TestCase;
