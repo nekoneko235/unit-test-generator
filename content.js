@@ -100,8 +100,8 @@ function acquireIO() {
 
 function createPHPUnittest(io) {
     let text = `<?php
-require_once 'src\\Task.php';
 use PHPUnit\\Framework\\TestCase;
+use Topsic\\Task;
 
 class TaskTest extends TestCase
 {
