@@ -22,7 +22,7 @@
                                     break;
                                 default:
                                     throw new Error(
-                                        'Unknown language. [result.language=' +
+                                        '定義されていない言語です[result.language=' +
                                             result.language +
                                             ']'
                                     );
