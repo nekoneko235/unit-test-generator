@@ -1,9 +1,9 @@
 {
-    "name": "TOPSIC - PHP Unit test",
+    "name": "TOPSIC - Unit test generator",
     "version": "1.0.0",
     "manifest_version": 3,
     "description": "問題ページから、ユニットテストを自動生成し、クリップボードにコピーします",
-    "permissions": ["clipboardWrite"],
+    "permissions": ["clipboardWrite", "storage"],
     "icons": {
         "32": "accept.png"
     },
@@ -17,6 +17,6 @@
         }
     ],
     "action": {
-        "default_popup": "options.html"
+        "default_popup": "popup.html"
     }
 }

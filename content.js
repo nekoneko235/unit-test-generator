@@ -4,11 +4,33 @@
         (e) => {
             if ((e.ctrlKey || e.metaKey) && e.code === 'Backslash') {
                 try {
-                    copyToClipboard(createPHPUnittest(acquireIO()));
+                    chrome.storage.sync.get(
+                        {
+                            language: 'PHP',
+                        },
+                        (result) => {
+                            switch (result.language) {
+                                case 'PHP':
+                                    copyToClipboard(
+                                        createPHPUnittest(acquireIO())
+                                    );
+                                    break;
+                                case 'Python3':
+                                    copyToClipboard(
+                                        createPyUnittest(acquireIO())
+                                    );
+                                    break;
+                                default:
+                                    throw new Error(
+                                        'Unknown language. [result.language=' +
+                                            result.language +
+                                            ']'
+                                    );
+                            }
+                        }
+                    );
                 } catch (error) {
                     console.error(error);
-                } finally {
-                    console.log('Ctrl+Backslash');
                 }
             }
         },
@@ -123,6 +145,43 @@ EOF
         ];
     }
 }`;
+
+    return text;
+}
+
+function createPyUnittest(io) {
+    let text = `import sys
+from io import StringIO
+import unittest
+
+def run():
+    solver()
+    sys.exit()
+
+class TestClass(unittest.TestCase):
+    def assertIO(self, input, output):
+        stdout, stdin = sys.stdout, sys.stdin
+        sys.stdout, sys.stdin = StringIO(), StringIO(input)
+        solver()
+        sys.stdout.seek(0)
+        out = sys.stdout.read()[:-1]
+        sys.stdout, sys.stdin = stdout, stdin
+        self.assertEqual(out, output)
+`;
+    for (let i = 0; i < io.length; i++) {
+        text += `
+    def test_${io[i].name}(self):
+        input = """${io[i].input.trim('\n').replace(/\n/g, '\r\n')}"""
+        output = """${io[i].output.trim('\n').replace(/\n/g, '\r\n')}"""
+        self.assertIO(input, output)
+`;
+    }
+
+    text += `
+if __name__ == "__main__":
+    # run()
+    unittest.main()
+`;
 
     return text;
 }
