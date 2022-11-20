@@ -151,18 +151,15 @@ EOF
 
 function createPyUnittest(io) {
     let text = `import sys
-from io import StringIO
+import task
 import unittest
-
-def run():
-    solver()
-    sys.exit()
+from io import StringIO
 
 class TestClass(unittest.TestCase):
     def assertIO(self, input, output):
         stdout, stdin = sys.stdout, sys.stdin
         sys.stdout, sys.stdin = StringIO(), StringIO(input)
-        solver()
+        task.solver()
         sys.stdout.seek(0)
         out = sys.stdout.read()[:-1]
         sys.stdout, sys.stdin = stdout, stdin
@@ -179,7 +176,6 @@ class TestClass(unittest.TestCase):
 
     text += `
 if __name__ == "__main__":
-    # run()
     unittest.main()
 `;
 
