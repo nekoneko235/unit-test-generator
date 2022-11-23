@@ -101,17 +101,9 @@ function acquireIO() {
 function createPHPUnittest(io) {
     let text = `<?php
 use PHPUnit\\Framework\\TestCase;
-use Topsic\\Task;
 
 class TaskTest extends TestCase
 {
-    private static $task;
-
-    public static function setUpBeforeClass(): void
-    {
-        TaskTest::$task = new Task();
-    }
-
     /**
      * @dataProvider ioProvider
      */
@@ -119,7 +111,7 @@ class TaskTest extends TestCase
     {
         $stringIo = fopen("data://text/plain,$input", 'r');
         $this->expectOutputString($expected);
-        TaskTest::$task->solver($stringIo);
+        solver($stringIo);
     }
 
     public function ioProvider(): array
