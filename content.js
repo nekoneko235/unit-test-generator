@@ -131,12 +131,12 @@ class TaskTest extends TestCase
             '${io[i].name}' => [
                 <<<EOF`;
         text += `
-${io[i].input.trim().replace(/\n/g, '\r\n')}
+${io[i].input.trim()}
 EOF,`;
         text += `
                 <<<EOF`;
         text += `
-${io[i].output.trim().replace(/\n/g, '\r\n')}
+${io[i].output.trim()}
 EOF
             ],`;
     }
