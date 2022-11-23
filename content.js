@@ -145,21 +145,21 @@ import unittest
 from io import StringIO
 
 class TestClass(unittest.TestCase):
-    def assertIO(self, input, output):
+    def assertIO(self, input, expected):
         stdout, stdin = sys.stdout, sys.stdin
         sys.stdout, sys.stdin = StringIO(), StringIO(input)
         task.solver()
         sys.stdout.seek(0)
-        out = sys.stdout.read()[:-1]
+        output = sys.stdout.read()[:-1]
         sys.stdout, sys.stdin = stdout, stdin
-        self.assertEqual(out, output)
+        self.assertEqual(output, expected)
 `;
     for (let i = 0; i < io.length; i++) {
         text += `
     def test_${io[i].name}(self):
         input = """${io[i].input.trim()}"""
-        output = """${io[i].output.trim()}"""
-        self.assertIO(input, output)
+        expected = """${io[i].output.trim()}"""
+        self.assertIO(input, expected)
 `;
     }
 
