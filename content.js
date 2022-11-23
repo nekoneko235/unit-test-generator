@@ -168,8 +168,8 @@ class TestClass(unittest.TestCase):
     for (let i = 0; i < io.length; i++) {
         text += `
     def test_${io[i].name}(self):
-        input = """${io[i].input.trim('\n').replace(/\n/g, '\r\n')}"""
-        output = """${io[i].output.trim('\n').replace(/\n/g, '\r\n')}"""
+        input = """${io[i].input.trim()}"""
+        output = """${io[i].output.trim()}"""
         self.assertIO(input, output)
 `;
     }
