@@ -129,13 +129,10 @@ class TaskTest extends TestCase
     for (let i = 0; i < io.length; i++) {
         text += `
             '${io[i].name}' => [
-                <<<EOF`;
-        text += `
+                <<<EOF
 ${io[i].input.trim()}
-EOF,`;
-        text += `
-                <<<EOF`;
-        text += `
+EOF,
+                <<<EOF
 ${io[i].output.trim()}
 EOF
             ],`;
