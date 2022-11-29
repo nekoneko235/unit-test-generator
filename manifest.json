@@ -14,7 +14,7 @@
                 "https://*/examinations/*/problem_detail/*",
                 "https://*/examinations/*/examination_results/*/resubmit"
             ],
-            "js": ["jquery-3.6.1.min.js", "content.js"]
+            "js": ["content.js"]
         }
     ],
     "action": {

@@ -48,9 +48,14 @@ function acquireIO() {
     let output = null;
     let io = [];
 
-    let sections = $('#proble_description section');
+    // let sections = $('#proble_description section');
+    let sections = document
+        .getElementById('proble_description')
+        .querySelectorAll('section');
     if (!sections.length) {
-        sections = $('#accordion-area-problem-sentence section');
+        sections = document
+            .getElementById('accordion-area-problem-sentence')
+            .querySelectorAll('section');
     }
 
     if (!sections.length) {
@@ -58,12 +63,12 @@ function acquireIO() {
     }
 
     for (let i = 0; i < sections.length; i++) {
-        let section = $(sections[i]);
+        let section = sections[i];
 
-        let h3 = section.find('h3');
-        let pre = section.find('pre');
+        let h3 = section.querySelectorAll('h3');
+        let pre = section.querySelectorAll('pre');
 
-        if (h3.length > 0 && pre.length > 0 && $(h3[0]).is(':visible')) {
+        if (h3.length > 0 && pre.length > 0 && h3[0].offsetParent) {
             let header = h3[0].firstChild.textContent.trim();
             let example = pre[0].textContent;
 
