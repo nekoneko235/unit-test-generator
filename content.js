@@ -48,7 +48,6 @@ function acquireIO() {
     let output = null;
     let io = [];
 
-    // let sections = $('#proble_description section');
     let sections = document
         .getElementById('proble_description')
         .querySelectorAll('section');
