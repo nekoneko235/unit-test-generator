@@ -46,12 +46,16 @@ function acquireIO() {
     let name = null;
     let input = null;
     let output = null;
+    let sections = null;
     let io = [];
 
-    let sections = document
-        .getElementById('proble_description')
-        .querySelectorAll('section');
-    if (!sections.length) {
+    if (document.getElementById('proble_description') != null) {
+        // Atcoder過去問
+        sections = document
+            .getElementById('proble_description')
+            .querySelectorAll('section');
+    } else {
+        // 受験履歴=>再提出=>問題文
         sections = document
             .getElementById('accordion-area-problem-sentence')
             .querySelectorAll('section');
