@@ -118,7 +118,8 @@ class TaskTest extends TestCase
     public function testSampleIO(string $input, string $expected): void
     {
         $stringIo = fopen("data://text/plain,$input", 'r');
-        $this->expectOutputRegex("/^" . $expected . "(\\s+)?$/");
+        $this->expectOutputRegex("/^(\\s+)?\\Q" . $expected . "\\E(\\s+)?$/");
+        // $this->expectOutputString($expected);
         solver($stringIo);
     }
 
