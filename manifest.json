@@ -11,6 +11,7 @@
         {
             "matches": [
                 "https://*/atcoder_problems/abc*",
+                "https://*/atcoder_problems/arc*",
                 "https://*/examinations/*/problem_detail/*",
                 "https://*/examinations/*/examination_results/*/resubmit"
             ],
