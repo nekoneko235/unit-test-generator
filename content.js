@@ -121,6 +121,8 @@ class TaskTest extends TestCase
         fwrite($stringIo, $input);
         rewind($stringIo);
         $this->expectOutputRegex("/^(\\s+)?\\Q" . $expected . "\\E(\\s+)?$/");
+        // "Compilation failed"の場合は、OutputRegexの代わりにOutputStringを実行する
+        // $this->expectOutputString($expected);
         solver($stringIo);
     }
 
