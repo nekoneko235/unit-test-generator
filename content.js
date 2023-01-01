@@ -55,6 +55,7 @@ function acquireIO() {
             .getElementById('proble_description')
             .querySelectorAll('section');
     } else {
+        // 受験=>問題文
         // 受験履歴=>再提出=>問題文
         sections = document
             .getElementById('accordion-area-problem-sentence')
@@ -122,6 +123,8 @@ class TaskTest extends TestCase
         rewind($stringIo);
         $this->expectOutputRegex("/^(\\s+)?\\Q" . $expected . "\\E(\\s+)?$/");
         // "Compilation failed"の場合は、OutputRegexの代わりにOutputStringを実行する
+        // その場合、行頭または末尾にホワイトスペースがあるとテストにパスしないが
+        // ジャッジサーバーではACになるので気にしないでおっけー
         // $this->expectOutputString($expected);
         solver($stringIo);
     }
