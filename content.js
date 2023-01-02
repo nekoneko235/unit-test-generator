@@ -4,6 +4,7 @@
         (e) => {
             if ((e.ctrlKey || e.metaKey) && e.code === 'Backslash') {
                 try {
+                    // 以下言語が追加されることを想定し、拡張性を持たせておく
                     chrome.storage.sync.get(
                         {
                             language: 'PHP',
@@ -13,11 +14,6 @@
                                 case 'PHP':
                                     copyToClipboard(
                                         createPHPUnittest(acquireIO())
-                                    );
-                                    break;
-                                case 'Python3':
-                                    copyToClipboard(
-                                        createPyUnittest(acquireIO())
                                     );
                                     break;
                                 default:
@@ -149,39 +145,6 @@ EOF
         ];
     }
 }`;
-
-    return text;
-}
-
-function createPyUnittest(io) {
-    let text = `import sys
-import task
-import unittest
-from io import StringIO
-
-class TestClass(unittest.TestCase):
-    def assertIO(self, input, expected):
-        stdout, stdin = sys.stdout, sys.stdin
-        sys.stdout, sys.stdin = StringIO(), StringIO(input)
-        task.solver()
-        sys.stdout.seek(0)
-        output = sys.stdout.read()[:-1]
-        sys.stdout, sys.stdin = stdout, stdin
-        self.assertEqual(output, expected)
-`;
-    for (let i = 0; i < io.length; i++) {
-        text += `
-    def test_${io[i].name}(self):
-        input = """${io[i].input.trim()}"""
-        expected = """${io[i].output.trim()}"""
-        self.assertIO(input, expected)
-`;
-    }
-
-    text += `
-if __name__ == "__main__":
-    unittest.main()
-`;
 
     return text;
 }
