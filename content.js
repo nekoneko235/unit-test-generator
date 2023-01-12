@@ -16,6 +16,11 @@
                                         createPHPUnittest(acquireIO())
                                     );
                                     break;
+                                case 'Python3':
+                                    copyToClipboard(
+                                        createPyUnittest(acquireIO())
+                                    );
+                                    break;
                                 default:
                                     throw new Error(
                                         '定義されていない言語です[result.language=' +
@@ -101,6 +106,39 @@ function acquireIO() {
     }
 
     return io;
+}
+
+function createPyUnittest(io) {
+    let text = `import sys
+import task
+import unittest
+from io import StringIO
+
+class TestClass(unittest.TestCase):
+    def assertIO(self, input, expected):
+        stdout, stdin = sys.stdout, sys.stdin
+        sys.stdout, sys.stdin = StringIO(), StringIO(input)
+        task.solver()
+        sys.stdout.seek(0)
+        output = sys.stdout.read()[:-1]
+        sys.stdout, sys.stdin = stdout, stdin
+        self.assertEqual(output.strip(), expected)
+`;
+    for (let i = 0; i < io.length; i++) {
+        text += `
+    def test_${io[i].name}(self):
+        input = """${io[i].input.trim()}"""
+        expected = """${io[i].output.trim()}"""
+        self.assertIO(input, expected)
+`;
+    }
+
+    text += `
+if __name__ == "__main__":
+    unittest.main()
+`;
+
+    return text;
 }
 
 function createPHPUnittest(io) {
